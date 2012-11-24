@@ -1,6 +1,12 @@
 [NodeFly](http://addons.heroku.com/nodefly) is an [add-on](http://addons.heroku.com) for monitoring Node.js applications.
 
-Adding functionality X to an application provides benefits X, Y and Z. [[Sell the benefits here! Don't skimp - developers have many options these days.]]
+NodeFly injects a lightweight analytics tool into your application
+allowing you to see exactly what's going on.
+The NodeFly agent tracks overall time per request,
+and reports how much time in MySQL, Redis, and other resources.
+
+NodeFly works well for both development and production,
+and has helped many people track down memory-leaks and unexpected latencies.
 
 NodeFly is accessible via an API and has supported client libraries for Node.js.
 
