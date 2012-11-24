@@ -92,8 +92,12 @@ or by visiting the [Heroku apps web interface](http://heroku.com/myapps) and sel
 
 ## Troubleshooting
 
-If [[feature X]] does not seem to be [[common issue Y]] then 
-[[add specific commands to look for symptoms of common issue Y]].
+After configuration NodeFly is automatic.
+If you should experience any issues, please let us know immediately.
+There are a number of ways to get help:
+
+- If you have a copy of the error, you can open a issue on our [Github Issue Tracker](https://github.com/NodeFly/NodeFly/issues)
+- We also accept email question at support@nodefly.com
 
 ## Migrating between plans
 
