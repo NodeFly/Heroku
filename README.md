@@ -95,16 +95,6 @@ There are a number of ways to get help:
 - We also accept email question at support@nodefly.com
 - Message us on [our twitter](https://twitter.com/NodeFly)
 
-## Migrating between plans
-
-Application owners should carefully manage the migration timing to ensure proper application function during the migration process.
-
-Use the `heroku addons:upgrade` command to migrate to a new plan.
-
-    $ heroku addons:upgrade nodefly:premium
-    -----> Upgrading nodefly:premium to sharp-mountain-4005... done, v18 ($49/mo)
-           Your plan has been updated to: nodefly:premium
-
 ## Removing the add-on
 
 NodeFly can be removed via the  CLI.
