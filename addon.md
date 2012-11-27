@@ -78,7 +78,7 @@ Credentials and other sensitive configuration values should not be committed to 
 
 The NodeFly dashboard allows you to view the metrics collected by the NodeFly agent.
 
-![NodeFly Dashboard](//raw.github.com/gist/7242786cbbcf5b044971/b38a3e45e2de5255487d40a6ffde9c7a79cd54de/dashboard.png)
+![NodeFly Dashboard](//raw.github.com/gist/7242786cbbcf5b044971/aa844493dfdd04bf53c5c9423f9dce8d42a38e62/dashboard.png)
 
 The dashboard can be accessed via the CLI:
 
