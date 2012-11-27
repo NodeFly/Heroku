@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>NodeFly Heroku Addon by NodeFly</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>NodeFly Heroku Addon</h1>
+          <h2></h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/NodeFly/Heroku/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/NodeFly/Heroku/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/NodeFly/Heroku" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <p><a href="http://addons.heroku.com/nodefly">NodeFly</a> is an <a href="http://addons.heroku.com">add-on</a> for monitoring Node.js applications.</p>
+
+<p>NodeFly injects a lightweight analytics tool into your application
+allowing you to see exactly what's going on.
+The NodeFly agent tracks overall time per request,
+and reports how much time in MySQL, Redis, and other resources.</p>
+
+<p>NodeFly works well for both development and production,
+and has helped many people track down memory-leaks and unexpected latencies.</p>
+
+<p>NodeFly is accessible via an API and has supported client libraries for Node.js.</p>
+
+<h2>Provisioning the add-on</h2>
+
+<p>NodeFly can be attached to a Heroku application via the  CLI:</p>
+
+<div>
+A list of all plans available can be found [here](http://addons.heroku.com/nodefly).
+</div>
+
+<pre><code>:::term
+$ heroku addons:add nodefly
+-----&gt; Adding nodefly to sharp-mountain-4005... done, v18 (free)
+</code></pre>
+
+<p>Once NodeFly has been added a <code>NODEFLY_APPLICATION_KEY</code> setting will be available in the app configuration and will contain the application key required to begin monitoring your application. This can be confirmed using the <code>heroku config:get</code> command.</p>
+
+<pre><code>:::term
+$ heroku config:get NODEFLY_APPLICATION_KEY
+00000000-0000-0000-0000-000000000000
+</code></pre>
+
+<p>After installing NodeFly the application should be configured to fully integrate with the add-on.</p>
+
+<p>Add nodefly to your package.json in your web application:</p>
+
+<pre><code>{
+    "name": "my-awesome-application",
+    "dependencies": {
+        "nodefly": "stable"
+    }
+}
+</code></pre>
+
+<p>Enter the following at the top of your module before any other requires:</p>
+
+<pre><code>require('nodefly').profile(
+    process.env.NODEFLY_APPLICATION_KEY,
+    [process.env.APPLICATION_NAME,'Heroku']
+);
+</code></pre>
+
+<p>You should set <code>APPLICATION_NAME</code> using the command line:</p>
+
+<pre><code>:::term
+$ heroku config:set APPLICATION_NAME &lt;A short but descriptive name&gt;
+</code></pre>
+
+<h2>Local setup</h2>
+
+<h3>Environment setup</h3>
+
+<p>After provisioning the add-on it’s necessary to locally replicate the config vars so your development environment can operate against the service.</p>
+
+<div>
+When running locally in development mode, we recommend _changing_ your `APPLICATION_NAME` environment variable.
+This will differentiate the development and production environments in your analytics.
+You do _not_ have to change your `NODEFLY_APPLICATION_KEY`.
+</div>
+
+<p>Use <a href="//devcenter.heroku.com/articles/procfile#developing-locally-with-foreman">Foreman</a> 
+to reliably configure and run the process formation specified in your app’s 
+<a href="//devcenter.heroku.com/articles/procfile#declaring-process-types">Procfile</a>.
+Foreman reads configuration variables from an .env file. 
+Use the following command to add the NODEFLY_APPLICATION_KEY values retrieved from heroku config to <code>.env</code>.</p>
+
+<pre><code>:::term
+$ heroku config -s | grep NODEFLY_APPLICATION_KEY &gt;&gt; .env
+$ more .env
+</code></pre>
+
+<blockquote>
+<p>We also recommend a pure Node.js implementation of <a href="https://npmjs.org/package/foreman">Foreman</a>.</p>
+</blockquote>
+
+<h2>Dashboard</h2>
+
+<p>The NodeFly dashboard allows you to view the metrics collected by the NodeFly agent.</p>
+
+<p><img src="//raw.github.com/gist/7242786cbbcf5b044971/aa844493dfdd04bf53c5c9423f9dce8d42a38e62/dashboard.png" alt="NodeFly Dashboard"></p>
+
+<p>The NodeFly Heroku Console can be accessed via the CLI:</p>
+
+<pre><code>:::term
+$ heroku addons:open nodefly
+Opening nodefly for sharp-mountain-4005…
+</code></pre>
+
+<p>or by visiting the <a href="http://heroku.com/myapps">Heroku apps web interface</a> and selecting the application in question. Select NodeFly from the Add-ons menu.</p>
+
+<p>From the console, you can open the dashboard without requiring an additional login, you will be automatically connected to your Heroku instance.</p>
+
+<h2>Troubleshooting</h2>
+
+<p>After configuration NodeFly is automatic.
+If you should experience any issues, please let us know immediately.
+There are a number of ways to get help:</p>
+
+<ul>
+<li>If you have a copy of the error, you can open a issue on our <a href="https://github.com/NodeFly/NodeFly/issues">Github Issue Tracker</a>
+</li>
+<li>We also accept email question at <a href="mailto:support@nodefly.com">support@nodefly.com</a>
+</li>
+</ul><h2>Migrating between plans</h2>
+
+<div>Application owners should carefully manage the migration timing to ensure proper application function during the migration process.</div>
+
+<p>Use the <code>heroku addons:upgrade</code> command to migrate to a new plan.</p>
+
+<pre><code>:::term
+$ heroku addons:upgrade nodefly:premium
+-----&gt; Upgrading nodefly:premium to sharp-mountain-4005... done, v18 ($49/mo)
+       Your plan has been updated to: nodefly:premium
+</code></pre>
+
+<h2>Removing the add-on</h2>
+
+<p>NodeFly can be removed via the  CLI.</p>
+
+<div>This will destroy all associated data and cannot be undone!</div>
+
+<pre><code>:::term
+$ heroku addons:remove nodefly
+-----&gt; Removing nodefly from sharp-mountain-4005... done, v20 (free)
+</code></pre>
+        </section>
+
+        <footer>
+          NodeFly Heroku Addon is maintained by <a href="https://github.com/NodeFly">NodeFly</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
