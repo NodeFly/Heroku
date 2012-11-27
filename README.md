@@ -2,31 +2,31 @@
 
 NodeFly injects a lightweight analytics tool into your application
 allowing you to see exactly what's going on.
-The NodeFly agent tracks overall time per request,
-and reports how much time in MySQL, Redis, and other resources.
+The NodeFly agent track resources spent fulfilling each web request,
+as well as overall application health.
 
 NodeFly works well for both development and production,
-and has helped many people track down memory-leaks and unexpected latencies.
+and has helped many people boost performance.
 
-NodeFly is accessible via an API and has supported client libraries for Node.js.
+NodeFly is _only_ available for Node.js.
 
 ## Provisioning the add-on
 
-NodeFly can be attached to a Heroku application via the  CLI:
-
-A list of all plans available can be found [here](http://addons.heroku.com/nodefly).
+A NodeFly account can be created via the Heroku CLI:
 
     $ heroku addons:add nodefly
     -----> Adding nodefly to sharp-mountain-4005... done, v18 (free)
 
-Once NodeFly has been added a `NODEFLY_APPLICATION_KEY` setting will be available in the app configuration and will contain the application key required to begin monitoring your application. This can be confirmed using the `heroku config:get` command.
+Once NodeFly has been added a `NODEFLY_APPLICATION_KEY` 
+setting will be inserted into your application environment.
+This can be confirmed using the `heroku config:get` command.
 
     $ heroku config:get NODEFLY_APPLICATION_KEY
     00000000-0000-0000-0000-000000000000
 
-After installing NodeFly the application should be configured to fully integrate with the add-on.
+After registration, you _must_ configure your application to use the NodeFly agent as follows.
 
-Add nodefly to your package.json in your web application:
+Add the nodefly module to your package.json in your web application:
 
     {
         "name": "my-awesome-application",
@@ -35,7 +35,7 @@ Add nodefly to your package.json in your web application:
         }
     }
 
-Enter the following at the top of your module before any other requires:
+Enter the following at the top of your application before any other requires:
 
     require('nodefly').profile(
         process.env.NODEFLY_APPLICATION_KEY,
