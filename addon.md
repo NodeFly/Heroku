@@ -80,13 +80,15 @@ The NodeFly dashboard allows you to view the metrics collected by the NodeFly ag
 
 ![NodeFly Dashboard](//raw.github.com/gist/7242786cbbcf5b044971/aa844493dfdd04bf53c5c9423f9dce8d42a38e62/dashboard.png)
 
-The dashboard can be accessed via the CLI:
+The NodeFly Heroku Console can be accessed via the CLI:
 
     :::term
     $ heroku addons:open nodefly
     Opening nodefly for sharp-mountain-4005…
 
 or by visiting the [Heroku apps web interface](http://heroku.com/myapps) and selecting the application in question. Select NodeFly from the Add-ons menu.
+
+From the console, you can open the dashboard without requiring an additional login, you will be automatically connected to your Heroku instance.
 
 ## Troubleshooting
 
