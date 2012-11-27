@@ -76,11 +76,7 @@ Credentials and other sensitive configuration values should not be committed to 
 
 ## Dashboard
 
-<div class="callout" markdown="1">
-For more information on the features available within the NodeFly dashboard please see the docs at [mysite.com/docs](mysite.com/docs).
-</div>
-
-The NodeFly dashboard allows you to [[describe dashboard features]].
+The NodeFly dashboard allows you to view the metrics collected by the NodeFly agent.
 
 The dashboard can be accessed via the CLI:
 
@@ -119,7 +115,3 @@ NodeFly can be removed via the  CLI.
     :::term
     $ heroku addons:remove nodefly
     -----> Removing nodefly from sharp-mountain-4005... done, v20 (free)
-
-## Support
-
-All NodeFly support and runtime issues should be submitted via on of the [Heroku Support channels](support-channels). Any non-support related issues or product feedback is welcome at [NodeFly Support](http://nodefly.com/support).
