@@ -47,19 +47,15 @@ and has helped many people track down memory-leaks and unexpected latencies.</p>
 
 <p>NodeFly can be attached to a Heroku application via the  CLI:</p>
 
-<div>
-A list of all plans available can be found [here](http://addons.heroku.com/nodefly).
-</div>
+<p>A list of all plans available can be found <a href="http://addons.heroku.com/nodefly">here</a>.</p>
 
-<pre><code>:::term
-$ heroku addons:add nodefly
+<pre><code>$ heroku addons:add nodefly
 -----&gt; Adding nodefly to sharp-mountain-4005... done, v18 (free)
 </code></pre>
 
 <p>Once NodeFly has been added a <code>NODEFLY_APPLICATION_KEY</code> setting will be available in the app configuration and will contain the application key required to begin monitoring your application. This can be confirmed using the <code>heroku config:get</code> command.</p>
 
-<pre><code>:::term
-$ heroku config:get NODEFLY_APPLICATION_KEY
+<pre><code>$ heroku config:get NODEFLY_APPLICATION_KEY
 00000000-0000-0000-0000-000000000000
 </code></pre>
 
@@ -85,8 +81,7 @@ $ heroku config:get NODEFLY_APPLICATION_KEY
 
 <p>You should set <code>APPLICATION_NAME</code> using the command line:</p>
 
-<pre><code>:::term
-$ heroku config:set APPLICATION_NAME &lt;A short but descriptive name&gt;
+<pre><code>$ heroku config:set APPLICATION_NAME &lt;A short but descriptive name&gt;
 </code></pre>
 
 <h2>Local setup</h2>
@@ -95,11 +90,9 @@ $ heroku config:set APPLICATION_NAME &lt;A short but descriptive name&gt;
 
 <p>After provisioning the add-on it’s necessary to locally replicate the config vars so your development environment can operate against the service.</p>
 
-<div>
-When running locally in development mode, we recommend _changing_ your `APPLICATION_NAME` environment variable.
+<p>When running locally in development mode, we recommend <em>changing</em> your <code>APPLICATION_NAME</code> environment variable.
 This will differentiate the development and production environments in your analytics.
-You do _not_ have to change your `NODEFLY_APPLICATION_KEY`.
-</div>
+You do <em>not</em> have to change your <code>NODEFLY_APPLICATION_KEY</code>.</p>
 
 <p>Use <a href="//devcenter.heroku.com/articles/procfile#developing-locally-with-foreman">Foreman</a> 
 to reliably configure and run the process formation specified in your app’s 
@@ -107,8 +100,7 @@ to reliably configure and run the process formation specified in your app’s
 Foreman reads configuration variables from an .env file. 
 Use the following command to add the NODEFLY_APPLICATION_KEY values retrieved from heroku config to <code>.env</code>.</p>
 
-<pre><code>:::term
-$ heroku config -s | grep NODEFLY_APPLICATION_KEY &gt;&gt; .env
+<pre><code>$ heroku config -s | grep NODEFLY_APPLICATION_KEY &gt;&gt; .env
 $ more .env
 </code></pre>
 
@@ -124,8 +116,7 @@ $ more .env
 
 <p>The NodeFly Heroku Console can be accessed via the CLI:</p>
 
-<pre><code>:::term
-$ heroku addons:open nodefly
+<pre><code>$ heroku addons:open nodefly
 Opening nodefly for sharp-mountain-4005…
 </code></pre>
 
@@ -146,12 +137,11 @@ There are a number of ways to get help:</p>
 </li>
 </ul><h2>Migrating between plans</h2>
 
-<div>Application owners should carefully manage the migration timing to ensure proper application function during the migration process.</div>
+<p>Application owners should carefully manage the migration timing to ensure proper application function during the migration process.</p>
 
 <p>Use the <code>heroku addons:upgrade</code> command to migrate to a new plan.</p>
 
-<pre><code>:::term
-$ heroku addons:upgrade nodefly:premium
+<pre><code>$ heroku addons:upgrade nodefly:premium
 -----&gt; Upgrading nodefly:premium to sharp-mountain-4005... done, v18 ($49/mo)
        Your plan has been updated to: nodefly:premium
 </code></pre>
@@ -160,10 +150,9 @@ $ heroku addons:upgrade nodefly:premium
 
 <p>NodeFly can be removed via the  CLI.</p>
 
-<div>This will destroy all associated data and cannot be undone!</div>
+<p>This will destroy all associated data and cannot be undone!</p>
 
-<pre><code>:::term
-$ heroku addons:remove nodefly
+<pre><code>$ heroku addons:remove nodefly
 -----&gt; Removing nodefly from sharp-mountain-4005... done, v20 (free)
 </code></pre>
         </section>
