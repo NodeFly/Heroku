@@ -35,33 +35,33 @@
 
 <p>NodeFly injects a lightweight analytics tool into your application
 allowing you to see exactly what's going on.
-The NodeFly agent tracks overall time per request,
-and reports how much time in MySQL, Redis, and other resources.</p>
+The NodeFly agent tracks resources spent fulfilling each web request,
+as well as overall application health.</p>
 
 <p>NodeFly works well for both development and production,
-and has helped many people track down memory-leaks and unexpected latencies.</p>
+and has helped many people boost performance.</p>
 
-<p>NodeFly is accessible via an API and has supported client libraries for Node.js.</p>
+<p>NodeFly is <em>only</em> available for Node.js.</p>
 
 <h2>Provisioning the add-on</h2>
 
-<p>NodeFly can be attached to a Heroku application via the  CLI:</p>
-
-<p>A list of all plans available can be found <a href="http://addons.heroku.com/nodefly">here</a>.</p>
+<p>A NodeFly account can be created via the Heroku CLI:</p>
 
 <pre><code>$ heroku addons:add nodefly
 -----&gt; Adding nodefly to sharp-mountain-4005... done, v18 (free)
 </code></pre>
 
-<p>Once NodeFly has been added a <code>NODEFLY_APPLICATION_KEY</code> setting will be available in the app configuration and will contain the application key required to begin monitoring your application. This can be confirmed using the <code>heroku config:get</code> command.</p>
+<p>Once NodeFly has been added a <code>NODEFLY_APPLICATION_KEY</code> 
+setting will be inserted into your application environment.
+This can be confirmed using the <code>heroku config:get</code> command.</p>
 
 <pre><code>$ heroku config:get NODEFLY_APPLICATION_KEY
 00000000-0000-0000-0000-000000000000
 </code></pre>
 
-<p>After installing NodeFly the application should be configured to fully integrate with the add-on.</p>
+<p>After registration, you <em>must</em> configure your application to use the NodeFly agent as follows.</p>
 
-<p>Add nodefly to your package.json in your web application:</p>
+<p>Add the nodefly module to your <code>package.json</code> in your web application:</p>
 
 <pre><code>{
     "name": "my-awesome-application",
@@ -71,7 +71,7 @@ and has helped many people track down memory-leaks and unexpected latencies.</p>
 }
 </code></pre>
 
-<p>Enter the following at the top of your module before any other requires:</p>
+<p>Enter the following at the top of your application before any other requires:</p>
 
 <pre><code>require('nodefly').profile(
     process.env.NODEFLY_APPLICATION_KEY,
@@ -83,6 +83,25 @@ and has helped many people track down memory-leaks and unexpected latencies.</p>
 
 <pre><code>$ heroku config:set APPLICATION_NAME &lt;A short but descriptive name&gt;
 </code></pre>
+
+<h2>Dashboard</h2>
+
+<p>The NodeFly dashboard allows you to view the metrics collected by the NodeFly agent.</p>
+
+<p><img src="//raw.github.com/gist/7242786cbbcf5b044971/aa844493dfdd04bf53c5c9423f9dce8d42a38e62/dashboard.png" alt="NodeFly Dashboard"></p>
+
+<p>The NodeFly Heroku Console can be accessed via the CLI:</p>
+
+<pre><code>$ heroku addons:open nodefly
+Opening nodefly for sharp-mountain-4005…
+</code></pre>
+
+<p>or by visiting the <a href="http://heroku.com/myapps">Heroku apps web interface</a> and selecting the application in question. 
+Select NodeFly from the Add-ons menu.</p>
+
+<p>From the NodeFly-Heroku console, 
+you can open the dashboard without requiring an additional login; 
+you will be automatically connected to the dashboard of your Heroku instance.</p>
 
 <h2>Local setup</h2>
 
@@ -108,25 +127,9 @@ $ more .env
 <p>We also recommend a pure Node.js implementation of <a href="https://npmjs.org/package/foreman">Foreman</a>.</p>
 </blockquote>
 
-<h2>Dashboard</h2>
-
-<p>The NodeFly dashboard allows you to view the metrics collected by the NodeFly agent.</p>
-
-<p><img src="//raw.github.com/gist/7242786cbbcf5b044971/aa844493dfdd04bf53c5c9423f9dce8d42a38e62/dashboard.png" alt="NodeFly Dashboard"></p>
-
-<p>The NodeFly Heroku Console can be accessed via the CLI:</p>
-
-<pre><code>$ heroku addons:open nodefly
-Opening nodefly for sharp-mountain-4005…
-</code></pre>
-
-<p>or by visiting the <a href="http://heroku.com/myapps">Heroku apps web interface</a> and selecting the application in question. Select NodeFly from the Add-ons menu.</p>
-
-<p>From the console, you can open the dashboard without requiring an additional login, you will be automatically connected to your Heroku instance.</p>
-
 <h2>Troubleshooting</h2>
 
-<p>After configuration NodeFly is automatic.
+<p>After configuration, NodeFly is automatic.
 If you should experience any issues, please let us know immediately.
 There are a number of ways to get help:</p>
 
@@ -135,18 +138,9 @@ There are a number of ways to get help:</p>
 </li>
 <li>We also accept email question at <a href="mailto:support@nodefly.com">support@nodefly.com</a>
 </li>
-</ul><h2>Migrating between plans</h2>
-
-<p>Application owners should carefully manage the migration timing to ensure proper application function during the migration process.</p>
-
-<p>Use the <code>heroku addons:upgrade</code> command to migrate to a new plan.</p>
-
-<pre><code>$ heroku addons:upgrade nodefly:premium
------&gt; Upgrading nodefly:premium to sharp-mountain-4005... done, v18 ($49/mo)
-       Your plan has been updated to: nodefly:premium
-</code></pre>
-
-<h2>Removing the add-on</h2>
+<li>Message us on <a href="https://twitter.com/NodeFly">our twitter</a>
+</li>
+</ul><h2>Removing the add-on</h2>
 
 <p>NodeFly can be removed via the  CLI.</p>
 
@@ -162,7 +156,17 @@ There are a number of ways to get help:</p>
           This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
         </footer>
 
-        
+                  <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-35761563-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
       </div>
     </div>
   </body>
