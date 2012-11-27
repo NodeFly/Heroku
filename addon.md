@@ -58,21 +58,22 @@ You should set `APPLICATION_NAME` using the command line:
 After provisioning the add-on it’s necessary to locally replicate the config vars so your development environment can operate against the service.
 
 <div class="callout" markdown="1">
-Though less portable it’s also possible to set local environment variables using `export NODEFLY_APPLICATION_KEY=value`.
+When running locally in development mode, we recommend _changing_ your `APPLICATION_NAME` environment variable.
+This will differentiate the development and production environments in your analytics.
+You do _not_ have to change your `NODEFLY_APPLICATION_KEY`.
 </div>
 
-Use [Foreman](config-vars#local_setup) to reliably configure and run the process formation specified in your app’s [Procfile](procfile). Foreman reads configuration variables from an .env file. Use the following command to add the NODEFLY_APPLICATION_KEY values retrieved from heroku config to `.env`.
+Use [Foreman](//devcenter.heroku.com/articles/procfile#developing-locally-with-foreman) 
+to reliably configure and run the process formation specified in your app’s 
+[Procfile](//devcenter.heroku.com/articles/procfile#declaring-process-types).
+Foreman reads configuration variables from an .env file. 
+Use the following command to add the NODEFLY_APPLICATION_KEY values retrieved from heroku config to `.env`.
 
     :::term
     $ heroku config -s | grep NODEFLY_APPLICATION_KEY >> .env
     $ more .env
 
-> If you prefer not to install Ruby or Ruby Gems,
-> you may use a Node.js implementation of [Foreman](https://npmjs.org/package/foreman).
-
-<p class="warning" markdown="1">
-Credentials and other sensitive configuration values should not be committed to source-control. In Git exclude the .env file with: `echo .env >> .gitignore`.
-</p>
+>  We also recommend a pure Node.js implementation of [Foreman](https://npmjs.org/package/foreman).
 
 ## Dashboard
 
